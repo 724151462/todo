@@ -3,7 +3,7 @@ export default [
   {
     path: '/app/:id',
     component: () => import('../views/todo/todo.vue'),
-    props: (route) => ({id:route.query.b})
+    props: (route) => ({id:route.query.id})
   },
   {
     path: '/login',

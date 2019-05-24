@@ -2,6 +2,7 @@
   <div id="app">
     <div id="cover"></div>
     <Header></Header>
+    <p>{{fullName}}{{count}}</p>
     <!-- <todo></todo> -->
     <router-view></router-view>
     <Footer></Footer>
@@ -9,8 +10,13 @@
 </template>
 
 <script>
+import {
+  mapState,
+  mapGetters
+} from 'vuex'
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
+import { setInterval } from 'timers';
 // import Todo from './views/todo/todo.vue'
 
 export default {
@@ -18,6 +24,24 @@ export default {
     Header,
     Footer,
     // Todo,
+  },
+  mounted() {
+    console.log(this.$store.state)
+    let i = 1
+    setInterval(() => {
+      this.$store.commit('updateCount', i++)
+    }, 1000);
+  },
+  computed: {
+    ...mapState (['count']),
+    // count() {
+    //   console.log(this.$store.state.count)
+    //   return this.$store.state.count
+    // },
+    ...mapGetters (['fullName'])
+    // fullName () {
+    //   return this.$store.getters.fullName
+    // }
   }
 }
 </script>

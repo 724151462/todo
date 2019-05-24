@@ -68,6 +68,10 @@ export default {
     clearAllCompleted() {
       this.todos = this.todos.filter(todo => !todo.completed)
     }
+  },
+  beforeRouterUpdate (to, from, next) {
+    console.log(this.id)
+    next()
   }
 }
 </script>
