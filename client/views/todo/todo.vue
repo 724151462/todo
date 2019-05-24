@@ -33,6 +33,10 @@ export default {
       filter: 'all'
     }
   },
+  props: ['id'],
+  mounted() {
+    console.log(this.id)
+  },
   components: {
     Item,
     Tabs,
