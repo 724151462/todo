@@ -20,6 +20,9 @@ import { setInterval } from 'timers';
 // import Todo from './views/todo/todo.vue'
 
 export default {
+  metaInfo: {
+    title: 'To do app'
+  },
   components: {
     Header,
     Footer,

@@ -4,6 +4,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HTMLPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge')
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ExtractPlugin = require('extract-text-webpack-plugin')
 const isDev = process.env.NODE_ENV === 'development'
@@ -19,11 +20,12 @@ const defaultPluins = [
   new HTMLPlugin({
     template: path.join(__dirname, 'template.html')
   }),
+  new VueSSRClientPlugin(),
   new VueLoaderPlugin()
 ]
 
 const devServer = {
-  port: 8080,
+  port: 8000,
   host: '0.0.0.0',
   overlay: {
     errors: true,
@@ -63,7 +65,7 @@ if (isDev) {
 }else{
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../client/index.js')
+      app: path.join(__dirname, '../client/client-entry.js')
     },
     output: {
       filename: '[name].[chunkhash:8].js'
@@ -88,10 +90,9 @@ if (isDev) {
         }
       ]
     },
-    plugins: [
+    plugins: defaultPluins.concat([
       new ExtractPlugin('styles.[hash:8].css'),
-      new VueLoaderPlugin()
-    ],
+    ]),
     optimization: {
       splitChunks: {
         cacheGroups: {

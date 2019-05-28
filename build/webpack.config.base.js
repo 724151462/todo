@@ -9,7 +9,7 @@ const config = {
   mode: 'development',
   // 声明入口文件
   //‘__dirname’ 代表当前文件所在目录地址，在这里也就是根目录
-  entry: path.join(__dirname, '../client/index.js'),
+  entry: path.join(__dirname, '../client/client-entry.js'),
   devServer: {
     contentBase: './dist',
     hot: true,
@@ -21,7 +21,8 @@ const config = {
     // 输出文件名
     filename: 'bundle.[hash:8].js',
     // 输出文件的路径
-    path: path.join(__dirname, '../dist')
+    path: path.join(__dirname, '../public'),
+    publicPath: 'http://127.0.0.1:8000/public'
   },
   module: {
     rules: [
